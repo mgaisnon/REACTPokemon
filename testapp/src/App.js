@@ -6,11 +6,35 @@ import Logo from './media/logo.svg';
 function App() {
   const [pokemons, setPokemons] = useState([]);
   const [types, setTypes] = useState([]);
+  const [filteredPokemons, setFilteredPokemons] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [genFilter, setgenFilter] = useState('');
 
   useEffect(() => {
     fetchPokemon();
     fetchTypes();
   }, []);
+
+  useEffect(() => {
+    fetchFiltre();
+  },[searchTerm, pokemons])
+
+  
+  useEffect(() => {
+    fetchFiltre();
+  },[searchTerm, pokemons])
+
+  const fetchFiltre = async () => {
+    try {
+      // Filtrer les Pokémon en fonction du terme de recherche
+      const filtered = pokemons.filter(pokemon =>
+        pokemon.name?.fr.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredPokemons(filtered);
+    } catch (error) {
+      console.error('Erreur lors de la requête pokemons :', error);
+    }
+  }
 
   const fetchPokemon = async () => {
     try {
@@ -56,10 +80,10 @@ function App() {
     - Types (Eau, Feu, Dragon ...)
 
   Tri (croissant et decroissant): 
-   - Numero
-   - Alphabetique
-   - Poids
-   - Taille
+    - Numero
+    - Alphabetique
+    - Poids
+    - Taille
   
   + Recherche par nom qui s'actualise au fur et a mesure que l'on ecrit
 
@@ -82,11 +106,47 @@ function App() {
     <div className='div-page'>
       <img className='img-logo' src={Logo} alt='Logo' />
       <div className='filtre-div'>
-        
-        <input type="search" className="search"></input>
+        <select className='Filtre-gen'>
+          <option value="Genration">-- Generation --</option>
+          <option value="Gen1">Generation 1</option>
+          <option value="Gen2">Generation 2</option>
+          <option value="Gen3">Generation 3</option>
+          <option value="Gen4">Generation 4</option>
+          <option value="Gen5">Generation 5</option>
+          <option value="Gen6">Generation 6</option>
+          <option value="Gen7">Generation 7</option>
+          <option value="Gen8">Generation 8</option>
+          <option value="Gen9">Generation 9</option>
+        </select>
+        <select className='Filtre-types'>
+          <option value="Types">-- Types --</option>
+          <option value="Feu">Feu</option>
+          <option value="Plante">Plante</option>
+          <option value="Eau">Eau</option>
+          <option value="Acier">Acier</option>
+          <option value="Combat">Combat</option>
+          <option value="Dragon">Dragon</option>
+          <option value="Electric">Electric</option>
+          <option value="Fée">Fée</option>
+          <option value="Glace">Glace</option>
+          <option value="Insecte">Insecte</option>
+          <option value="Normal">Normal</option>
+          <option value="Poison">Poison</option>
+          <option value="Psy">Psy</option>
+          <option value="Roche">Roche</option>
+          <option value="Sol">Sol</option>
+          <option value="Spectre">Spectre</option>
+          <option value="Ténèbres">Ténèbres</option>
+          <option value="Vol">Vol</option>
+        </select>
+        <input type="search" 
+        className="search"
+        placeholder='Rechercher un Pokémon ...'
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}></input>
       </div>
       <div className='container'>
-        {pokemons.map((item) => (
+        {filteredPokemons.map((item) => (
           <div className='card-pokemon' key={item.id}>
             <p className='titre-pokemon'>{item.name.fr} #{item.id}</p>
             <img className='image-pokemon' src={item.image} alt={item.name.fr} />

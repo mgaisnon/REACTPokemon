@@ -37,6 +37,10 @@
   }
 }
 
+body {
+  background-color: rgb(230, 189, 93);
+
+}
 .div-page{
   text-align: center;
   background-color: rgb(230, 189, 93);
@@ -116,4 +120,21 @@
   vertical-align: middle;
   border-radius: 15px;
   margin-top: 10px;
+}
+
+.Filtre-gen{
+  width: 150px;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 15px;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.Filtre-types{
+  width: 130px;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 15px;
+  margin-top: 10px;
+  margin-right: 10px;
 }
