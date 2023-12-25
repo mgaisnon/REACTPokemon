@@ -9,7 +9,8 @@ function App() {
   const [filteredPokemons, setFilteredPokemons] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [genFilter, setgenFilter] = useState('');
-
+  const [typefilter, settypeFilter] = useState('');
+  
   useEffect(() => {
     fetchPokemon();
     fetchTypes();
@@ -18,11 +19,60 @@ function App() {
   useEffect(() => {
     fetchFiltre();
   },[searchTerm, pokemons])
-
   
   useEffect(() => {
-    fetchFiltre();
-  },[searchTerm, pokemons])
+    fetchGeneration();
+  },[genFilter, pokemons.generation])
+
+  useEffect(() => {
+    fetchTypesFilter();
+  },[typefilter, pokemons.types]
+
+  )
+
+  const handleGenerationChange = (event) => {
+    setgenFilter(event.target.value);
+  }
+  
+  const handleTypesChange = (event) => {
+    settypeFilter(event.target.value)
+  }
+
+  const fetchGeneration = () => {
+  try {
+    const filteredGeneration = pokemons.filter((pokemon) => {
+      const generationFilterCondition =
+        genFilter === "Generation" || pokemon.generation.toString() === genFilter;
+
+      const typeFilterCondition =
+        typefilter === "Types" || pokemon.types.includes(parseInt(typefilter));
+
+      return generationFilterCondition && typeFilterCondition;
+    });
+
+    setFilteredPokemons(filteredGeneration);
+  } catch (error) {
+    console.error('Erreur lors de la requête pokemons : ', error);
+  }
+};
+  
+const fetchTypesFilter = () => {
+  try {
+    const filteredType = pokemons.filter((pokemon) => {
+      const generationFilterCondition =
+        genFilter === "Generation" || pokemon.generation.toString() === genFilter;
+
+      const typeFilterCondition =
+        typefilter === "Types" || pokemon.types.includes(parseInt(typefilter));
+
+      return generationFilterCondition && typeFilterCondition;
+    });
+
+    setFilteredPokemons(filteredType);
+  } catch (error) {
+    console.error('Erreur lors de la requête pokemons : ', error);
+  }
+};
 
   const fetchFiltre = async () => {
     try {
@@ -73,20 +123,13 @@ function App() {
   };
 
 /** TODO
-  Ajouter Generation à la card de tous les pokemons
  
-  Filtre : 
-    - Generation (gen1,2,3,4...)
-    - Types (Eau, Feu, Dragon ...)
-
   Tri (croissant et decroissant): 
     - Numero
     - Alphabetique
     - Poids
     - Taille
   
-  + Recherche par nom qui s'actualise au fur et a mesure que l'on ecrit
-
   Fiche individuelle : 
     - Numero
     - Nom
@@ -106,38 +149,38 @@ function App() {
     <div className='div-page'>
       <img className='img-logo' src={Logo} alt='Logo' />
       <div className='filtre-div'>
-        <select className='Filtre-gen'>
-          <option value="Genration">-- Generation --</option>
-          <option value="Gen1">Generation 1</option>
-          <option value="Gen2">Generation 2</option>
-          <option value="Gen3">Generation 3</option>
-          <option value="Gen4">Generation 4</option>
-          <option value="Gen5">Generation 5</option>
-          <option value="Gen6">Generation 6</option>
-          <option value="Gen7">Generation 7</option>
-          <option value="Gen8">Generation 8</option>
-          <option value="Gen9">Generation 9</option>
+        <select className='Filtre-gen' onChange={handleGenerationChange}>
+          <option value="Generation">  Generations </option>
+          <option value="1">Generation 1</option>
+          <option value="2">Generation 2</option>
+          <option value="3">Generation 3</option>
+          <option value="4">Generation 4</option>
+          <option value="5">Generation 5</option>
+          <option value="6">Generation 6</option>
+          <option value="7">Generation 7</option>
+          <option value="8">Generation 8</option>
+          <option value="9">Generation 9</option>
         </select>
-        <select className='Filtre-types'>
-          <option value="Types">-- Types --</option>
-          <option value="Feu">Feu</option>
-          <option value="Plante">Plante</option>
-          <option value="Eau">Eau</option>
-          <option value="Acier">Acier</option>
-          <option value="Combat">Combat</option>
-          <option value="Dragon">Dragon</option>
-          <option value="Electric">Electric</option>
-          <option value="Fée">Fée</option>
-          <option value="Glace">Glace</option>
-          <option value="Insecte">Insecte</option>
-          <option value="Normal">Normal</option>
-          <option value="Poison">Poison</option>
-          <option value="Psy">Psy</option>
-          <option value="Roche">Roche</option>
-          <option value="Sol">Sol</option>
-          <option value="Spectre">Spectre</option>
-          <option value="Ténèbres">Ténèbres</option>
-          <option value="Vol">Vol</option>
+        <select className='Filtre-types' onChange={handleTypesChange}>
+          <option value="Types"> Types </option>
+          <option value="7">Feu</option>
+          <option value="11">Plante</option>
+          <option value="4">Eau</option>
+          <option value="1">Acier</option>
+          <option value="2">Combat</option>
+          <option value="3">Dragon</option>
+          <option value="5">Electric</option>
+          <option value="6">Fée</option>
+          <option value="8">Glace</option>
+          <option value="9">Insecte</option>
+          <option value="10">Normal</option>
+          <option value="12">Poison</option>
+          <option value="13">Psy</option>
+          <option value="14">Roche</option>
+          <option value="15">Sol</option>
+          <option value="16">Spectre</option>
+          <option value="17">Ténèbres</option>
+          <option value="18">Vol</option>
         </select>
         <input type="search" 
         className="search"
@@ -148,6 +191,7 @@ function App() {
       <div className='container'>
         {filteredPokemons.map((item) => (
           <div className='card-pokemon' key={item.id}>
+            <p className='gen'>{item.generation}</p>
             <p className='titre-pokemon'>{item.name.fr} #{item.id}</p>
             <img className='image-pokemon' src={item.image} alt={item.name.fr} />
             <div className='div-types'>

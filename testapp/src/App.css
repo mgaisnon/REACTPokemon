@@ -39,11 +39,12 @@
 
 body {
   background-color: rgb(230, 189, 93);
-
 }
+
 .div-page{
   text-align: center;
   background-color: rgb(230, 189, 93);
+  min-height: 100vh;
 }
 
 .img-logo{
@@ -116,6 +117,7 @@ body {
 }
 .search{
   width: 500px;
+  font-family: Showcard Gothic;
   text-align: center;
   vertical-align: middle;
   border-radius: 15px;
@@ -124,6 +126,8 @@ body {
 
 .Filtre-gen{
   width: 150px;
+  font-weight: 100;
+  font-family: Showcard Gothic;
   text-align: center;
   vertical-align: middle;
   border-radius: 15px;
@@ -133,8 +137,23 @@ body {
 .Filtre-types{
   width: 130px;
   text-align: center;
+  font-family: Showcard Gothic;
   vertical-align: middle;
   border-radius: 15px;
   margin-top: 10px;
   margin-right: 10px;
+}
+
+.gen{
+  position:absolute;
+  background-color: rgb(251, 30, 30);
+  color: rgb(255, 255, 255, 255);
+  border-radius: 100%;
+  width: 30px;
+  height: 28px;
+  font-family: Showcard Gothic;
+  text-align: center;
+  margin-top: 8px;
+  margin-left: 8px;
+  vertical-align: middle;
 }
