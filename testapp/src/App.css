@@ -168,11 +168,37 @@ body {
 
 .gif-pikachu{
   position: absolute;
-  top: 20%;
+  height: 150px;
+  top: 30%;
   left: 0;
   transform: translate(-50%);
   animation: moveRight 5s linear infinite;
 }
+
+.tri{
+  width: 130px;
+  text-align: center;
+  font-family: Showcard Gothic;
+  vertical-align: middle;
+  border-radius: 15px;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.langue{
+  width: 130px;
+  text-align: center;
+  font-family: Showcard Gothic;
+  vertical-align: middle;
+  border-radius: 15px;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+
+
 
 @keyframes moveRight {
   0% {

@@ -20,7 +20,7 @@ function App() {
     fetchTypes();
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 4000)
+    }, 4700)
     return () => clearTimeout(timer);
   }, []);
 
@@ -38,47 +38,46 @@ function App() {
 
   const handleGenerationChange = (event) => {
     setgenFilter(event.target.value);
-  }
+  };
   
   const handleTypesChange = (event) => {
-    settypeFilter(event.target.value)
-  }
+    settypeFilter(event.target.value);
+  };
 
   const fetchGeneration = () => {
-  try {
-    const filteredGeneration = pokemons.filter((pokemon) => {
-      const generationFilterCondition =
-        genFilter === "Generation" || pokemon.generation.toString() === genFilter;
-
-      const typeFilterCondition =
-        typefilter === "Types" || pokemon.types.includes(parseInt(typefilter));
-
-      return generationFilterCondition && typeFilterCondition;
-    });
-
-    setFilteredPokemons(filteredGeneration);
-  } catch (error) {
-    console.error('Erreur lors de la requête pokemons : ', error);
-  }
-};
+    try {
+      const filteredGeneration = pokemons.filter((pokemon) => {
+        const generationFilterCondition =
+          genFilter === "" || pokemon.generation.toString() === genFilter;
   
-const fetchTypesFilter = () => {
-  try {
-    const filteredType = pokemons.filter((pokemon) => {
-      const generationFilterCondition =
-        genFilter === "Generation" || pokemon.generation.toString() === genFilter;
-
-      const typeFilterCondition =
-        typefilter === "Types" || pokemon.types.includes(parseInt(typefilter));
-
-      return generationFilterCondition && typeFilterCondition;
-    });
-
-    setFilteredPokemons(filteredType);
-  } catch (error) {
-    console.error('Erreur lors de la requête pokemons : ', error);
-  }
-};
+        const typeFilterCondition =
+          typefilter === "" || pokemon.types.includes(parseInt(typefilter));
+  
+        return generationFilterCondition && typeFilterCondition;
+      });
+      setFilteredPokemons(filteredGeneration);
+    } catch (error) {
+      console.error('Erreur lors de la requête pokemons : ', error);
+    }
+  };
+  
+  const fetchTypesFilter = () => {
+    try {
+      const filteredType = pokemons.filter((pokemon) => {
+        const generationFilterCondition =
+          genFilter === "" || pokemon.generation.toString() === genFilter;
+  
+        const typeFilterCondition =
+          typefilter === "" || pokemon.types.includes(parseInt(typefilter));
+  
+        return generationFilterCondition && typeFilterCondition;
+      });
+      setFilteredPokemons(filteredType);
+    } catch (error) {
+      console.error('Erreur lors de la requête pokemons : ', error);
+    }
+  };
+  
 
   const fetchFiltre = async () => {
     try {
@@ -162,7 +161,7 @@ const fetchTypesFilter = () => {
       <img className='img-logo' src={Logo} alt='Logo' />
       <div className='filtre-div'>
         <select className='Filtre-gen' onChange={handleGenerationChange}>
-          <option value="Generation">  Generations </option>
+          <option value="">  Generations </option>
           <option value="1">Generation 1</option>
           <option value="2">Generation 2</option>
           <option value="3">Generation 3</option>
@@ -174,7 +173,7 @@ const fetchTypesFilter = () => {
           <option value="9">Generation 9</option>
         </select>
         <select className='Filtre-types' onChange={handleTypesChange}>
-          <option value="Types"> Types </option>
+          <option value=""> Types </option>
           <option value="7">Feu</option>
           <option value="11">Plante</option>
           <option value="4">Eau</option>
@@ -199,6 +198,22 @@ const fetchTypesFilter = () => {
         placeholder='Rechercher un Pokémon ...'
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}></input>
+        <select className='tri'>
+          <option value="">Tri</option>
+          <option value="">Numero Croissant</option>
+          <option value="">Numero Decroissant</option>
+          <option value="">Alphabetique Croissant</option>
+          <option value="">Alphabetique Decroissant</option>
+          <option value="">Poids Croissant</option>
+          <option value="">Poids Decroissant</option>
+          <option value="">Taille Croissant</option>
+          <option value="">Taille Decroissant</option>
+        </select>
+        <select className='langue'>
+          <option value="">Langues</option>
+          <option value="">Français</option>
+          <option value="">English</option>
+        </select>
       </div>
       <div className='container'>
         {filteredPokemons.map((item) => (
