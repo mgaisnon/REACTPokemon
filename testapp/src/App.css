@@ -157,3 +157,28 @@ body {
   margin-left: 8px;
   vertical-align: middle;
 }
+
+.loading-page{
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(230, 189, 93);
+
+}
+
+.gif-pikachu{
+  position: absolute;
+  top: 20%;
+  left: 0;
+  transform: translate(-50%);
+  animation: moveRight 5s linear infinite;
+}
+
+@keyframes moveRight {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: calc(100vw - 50px); /* Réglez la valeur en fonction de la largeur de votre image */
+  }
+}

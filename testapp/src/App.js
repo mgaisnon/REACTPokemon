@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import Logo from './media/logo.svg';
+import Loading from 'react-loading';
+import pikachu from './media/pikachu-running.gif'
 
 
 function App() {
+
   const [pokemons, setPokemons] = useState([]);
   const [types, setTypes] = useState([]);
   const [filteredPokemons, setFilteredPokemons] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [genFilter, setgenFilter] = useState('');
   const [typefilter, settypeFilter] = useState('');
+  const [loading, setLoading] = useState(true)
   
   useEffect(() => {
     fetchPokemon();
     fetchTypes();
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 4000)
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -26,9 +34,7 @@ function App() {
 
   useEffect(() => {
     fetchTypesFilter();
-  },[typefilter, pokemons.types]
-
-  )
+  },[typefilter, pokemons.types])
 
   const handleGenerationChange = (event) => {
     setgenFilter(event.target.value);
@@ -146,6 +152,12 @@ const fetchTypesFilter = () => {
  */
 
   return (
+    <div>
+      {loading ? (
+        <div className='loading-page'>
+        <img src={pikachu} className='gif-pikachu'></img>
+        </div>
+      ) : (
     <div className='div-page'>
       <img className='img-logo' src={Logo} alt='Logo' />
       <div className='filtre-div'>
@@ -205,6 +217,7 @@ const fetchTypesFilter = () => {
           </div>
         ))}
       </div>
+    </div>)}
     </div>
   );
 }
