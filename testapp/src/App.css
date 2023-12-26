@@ -5,6 +5,7 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -39,6 +40,7 @@
 
 body {
   background-color: rgb(230, 189, 93);
+
 }
 
 .div-page{
@@ -162,14 +164,16 @@ body {
   position: relative;
   width: 100vw;
   height: 100vh;
-  background-color: rgb(230, 189, 93);
-
+  background-image: url('./media/forest.jpg');
+  background-size: cover;
+  background-position:center 100%;
+  background-repeat: no-repeat;
 }
 
 .gif-pikachu{
   position: absolute;
-  height: 150px;
-  top: 30%;
+  height: 180px;
+  top: 70%;
   left: 0;
   transform: translate(-50%);
   animation: moveRight 5s linear infinite;

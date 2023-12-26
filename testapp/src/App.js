@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import Logo from './media/logo.svg';
-import Loading from 'react-loading';
 import pikachu from './media/pikachu-running.gif'
+import flagfr from './media/flagfr.png'
+import flagus from './media/flagus.png'
 
 
 function App() {
@@ -78,7 +79,6 @@ function App() {
     }
   };
   
-
   const fetchFiltre = async () => {
     try {
       // Filtrer les Pokémon en fonction du terme de recherche
@@ -211,8 +211,8 @@ function App() {
         </select>
         <select className='langue'>
           <option value="">Langues</option>
-          <option value="">Français</option>
-          <option value="">English</option>
+          <option value=""> Français</option>
+          <option value=""> English</option>
         </select>
       </div>
       <div className='container'>
