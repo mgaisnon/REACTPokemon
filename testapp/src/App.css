@@ -201,14 +201,26 @@ body {
   margin-left: 10px;
 }
 
+.titre-loading{
+  padding-top: 200px;
+  font-size: 45px;
+  text-align: center;
+  font-family: Showcard Gothic;
+  color: white;
+}
 
-
+.auteur{
+  font-size: 20px;
+  text-align: center;
+  font-family: Showcard Gothic;
+  color: white;
+}
 
 @keyframes moveRight {
   0% {
     left: 0;
   }
   100% {
-    left: calc(100vw - 50px); /* Réglez la valeur en fonction de la largeur de votre image */
+    left: calc(100vw - 50px); 
   }
 }

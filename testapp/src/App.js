@@ -154,6 +154,8 @@ function App() {
     <div>
       {loading ? (
         <div className='loading-page'>
+        <p className='titre-loading'>POKEDEX</p>
+        <p className='auteur'>FARASSI Yassin - GAISNON Mathieu</p>
         <img src={pikachu} className='gif-pikachu'></img>
         </div>
       ) : (
