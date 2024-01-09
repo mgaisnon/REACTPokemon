@@ -4,7 +4,7 @@ import Logo from './media/logo.svg';
 import pikachu from './media/pikachu-running.gif'
 import flagfr from './media/flagfr.png'
 import flagus from './media/flagus.png'
-
+import Modal from './components/Modal';
 
 function App() {
 
@@ -15,6 +15,8 @@ function App() {
   const [genFilter, setgenFilter] = useState('');
   const [typefilter, settypeFilter] = useState('');
   const [loading, setLoading] = useState(true)
+  const [selectedPokemon, setSelectedPokemon] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   
   useEffect(() => {
     fetchPokemon();
@@ -148,10 +150,11 @@ function App() {
 
     Divers : responsive de l'app + Changement de langue  
   
- */
+ */  
 
   return (
     <div>
+      
       {loading ? (
         <div className='loading-page'>
         <p className='titre-loading'>POKEDEX</p>
@@ -217,9 +220,13 @@ function App() {
           <option value=""> English</option>
         </select>
       </div>
-      <div className='container'>
+      {showModal && (
+            <Modal onClose={() => setShowModal(false)}pokemon={selectedPokemon}></Modal>
+          )}
+
+      <div className='container' >
         {filteredPokemons.map((item) => (
-          <div className='card-pokemon' key={item.id}>
+          <div className='card-pokemon' key={item.id} onClick={() => {setShowModal(true); setSelectedPokemon(item)}}>
             <p className='gen'>{item.generation}</p>
             <p className='titre-pokemon'>{item.name.fr} #{item.id}</p>
             <img className='image-pokemon' src={item.image} alt={item.name.fr} />
