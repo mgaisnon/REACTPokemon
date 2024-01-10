@@ -137,10 +137,6 @@ function App() {
     - Poids
     - Taille
   
-
-
-    Divers : responsive de l'app 
-  
  */  
 
   return (

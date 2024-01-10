@@ -1,15 +1,28 @@
-import './Modal.css';  
+import './Modal.css';
+import React, {useState } from 'react';
 
 /*  Fiche individuelle : 
-    - Generation
-    - Image + Shiny
-    - Type
     - Taille
     - Poids
     - Arbre des evolutions
     - Stats du pokemons*/
 
 const Modal = ({ onClose, pokemon, types }) => {
+  const [isShiny, setIsShiny] = useState(false);
+  const [isGrowIn, setIsGrowIn] = useState(false);
+
+  const toggleShiny = () => {
+    setIsShiny(!isShiny);
+    setIsGrowIn(true);
+
+    // Réinitialisez l'effet de croissance après un court délai
+    setTimeout(() => {
+      setIsGrowIn(false);
+    }, 300);
+  };
+
+
+
   const getTypesNamesById = (typeIds) => {
     if (Array.isArray(typeIds)) {
       return typeIds.map((typeId) => {
@@ -43,7 +56,10 @@ const Modal = ({ onClose, pokemon, types }) => {
     <div className='modal-content'>
       {pokemon && (
         <div>
-          <img className='image-pokemon-modal' src={pokemon.image} alt={pokemon.name.fr} />
+          <img className={`image-pokemon-modal ${isGrowIn ? 'grow-in' : ''}`}
+          src={isShiny ? pokemon.image_shiny : pokemon.image} 
+          alt="Ce pokemon n'a pas de forme Shiny" 
+          onClick={toggleShiny}/>
           <div className='container-type-modal'>
             {getTypesNamesById(pokemon.types).map((typeName, index) => (
               <p className='type-modal'>
@@ -52,7 +68,29 @@ const Modal = ({ onClose, pokemon, types }) => {
             ))}
             </div>
         </div>
+        
       )}
+      <div className='modal-content-stats'>
+          {pokemon && (
+            <div>
+              <h3 className='titre-stats'>Statistiques</h3>
+              <p className='stats-pk'> HP : {pokemon.stats.hp}</p>
+              <p className='stats-pk'> ATK : {pokemon.stats.atk}</p>
+              <p className='stats-pk'> DEF : {pokemon.stats.def}</p>
+              <p className='stats-pk'> VIT : {pokemon.stats.vit}</p>
+              <p className='stats-pk'> SPE_ATK : {pokemon.stats.spe_atk}</p>
+              <p className='stats-pk'> SPE_DEF : {pokemon.stats.spe_def}</p>
+             </div> 
+          )}
+      </div>
+      <div className='modal-content-evolution'>
+          {pokemon && (
+            <div>
+              <h3 className='titre-evolution'>Evolution</h3>
+              
+            </div>
+          )}
+      </div>
     </div>
   </div>
   );
