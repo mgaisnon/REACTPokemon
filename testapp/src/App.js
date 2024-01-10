@@ -137,18 +137,9 @@ function App() {
     - Poids
     - Taille
   
-  Fiche individuelle : 
-    - Numero
-    - Nom
-    - Generation
-    - Image + Shiny
-    - Type
-    - Taille
-    - Poids
-    - Arbre des evolutions
-    - Stats du pokemons
 
-    Divers : responsive de l'app + Changement de langue  
+
+    Divers : responsive de l'app 
   
  */  
 
@@ -221,7 +212,7 @@ function App() {
         </select>
       </div>
       {showModal && (
-            <Modal onClose={() => setShowModal(false)}pokemon={selectedPokemon}></Modal>
+            <Modal onClose={() => setShowModal(false)}pokemon={selectedPokemon} types={types} ></Modal>
           )}
 
       <div className='container' >

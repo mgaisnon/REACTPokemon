@@ -1,32 +1,86 @@
-/* Modal.css */
 
 .modal-overlay {
+    margin-top: 3%;
+    margin-left: 8%;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+    width: 1300px;
+    height: 600px;
+    background-color: white;
+    z-index: 1001;
+    border-radius: 50px;
+    box-shadow: 20px 20px 20px 20px rgba(0, 0, 0, 0.495);
+  }
+  
+.modal-content {
+    background-color: white;
+    padding: 50px;
+    border-radius: 50px;
+    align-items: baseline;
+  }
+  
+.close-button{
     display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000; /* set a higher z-index */
-  }
-  
-  .modal-content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    z-index: 1001; /* set a higher z-index */
-  }
-  
-  .modal-close-btn {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 30px;
+    right: 30px;
     cursor: pointer;
+    color: #000; /* Couleur du bouton de fermeture */
   }
+
+.close-button:hover{
+    cursor: pointer;
+ }
+
+ .generation-modal{
+  margin-top: 30px;
+  margin-left: 30px;
+  position: relative;
+  background-color: rgb(238, 2, 2);
+  color: black;
+  border-radius: 100%;
+  width: 30px;
+  height: 28px;
+  font-family: Showcard Gothic;
+  text-align: center;
+ }
+
+.container-type-modal{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.type-modal{
+  font-family:Showcard Gothic;
+  margin-top: 20px;
+}
+
+.image-pokemon-modal{
+  width: 250px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  box-shadow: #282c34;
+}
+
+.titre-pokemon-modal{
+  position: relative;
+  top: -30px;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  text-transform: capitalize;
+  font-size: 25px;
+  font-weight: 200;
+  font-family:Showcard Gothic;
+}
+
+.image-type-modal{
+  width: 20px;
+  margin: 5px;
+}
   
-  /* Add any additional styling as needed */
+  /* Ajoutez tout style supplémentaire selon vos besoins */
   
