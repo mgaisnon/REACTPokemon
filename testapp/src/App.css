@@ -57,8 +57,10 @@ body {
 
 }
 .container{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   }
 
   .card-pokemon{
@@ -109,7 +111,6 @@ body {
 }
 
 .type-id{
-  padding-top: 15px;
   margin-left: 15px;
   margin-right: 15px;
   font-family: Showcard Gothic;

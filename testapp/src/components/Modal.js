@@ -56,7 +56,8 @@ const Modal = ({ onClose, pokemon, types }) => {
     <div className='modal-content'>
       {pokemon && (
         <div>
-          <img className={`image-pokemon-modal ${isGrowIn ? 'grow-in' : ''}`}
+          <img 
+          className={`image-pokemon-modal ${isGrowIn ? 'grow-in' : ''}`}
           src={isShiny ? pokemon.image_shiny : pokemon.image} 
           alt="Ce pokemon n'a pas de forme Shiny" 
           onClick={toggleShiny}/>
