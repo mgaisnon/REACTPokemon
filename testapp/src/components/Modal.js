@@ -2,12 +2,9 @@ import './Modal.css';
 import React, {useState } from 'react';
 
 /*  Fiche individuelle : 
-    - Taille
-    - Poids
     - Arbre des evolutions
-    - Stats du pokemons*/
-
-const Modal = ({ onClose, pokemon, types }) => {
+*/
+const Modal = ({ onClose, pokemon, types, allpokemon }) => {
   const [isShiny, setIsShiny] = useState(false);
   const [isGrowIn, setIsGrowIn] = useState(false);
 
@@ -20,9 +17,6 @@ const Modal = ({ onClose, pokemon, types }) => {
       setIsGrowIn(false);
     }, 300);
   };
-
-
-
   const getTypesNamesById = (typeIds) => {
     if (Array.isArray(typeIds)) {
       return typeIds.map((typeId) => {
@@ -68,8 +62,19 @@ const Modal = ({ onClose, pokemon, types }) => {
             </p>
             ))}
             </div>
-        </div>
-        
+            <div className='container-corpulence'>
+              {pokemon && (
+                <div>
+                  <p className='corpulence'>Taille : {pokemon.height} m</p>
+                </div>
+              )}
+              {pokemon && (
+                <div>
+                  <p className='corpulence'>Poids : {pokemon.weight} kg</p>
+                </div>
+              )} 
+            </div>
+        </div>   
       )}
       <div className='modal-content-stats'>
           {pokemon && (
@@ -84,13 +89,45 @@ const Modal = ({ onClose, pokemon, types }) => {
              </div> 
           )}
       </div>
-      <div className='modal-content-evolution'>
-          {pokemon && (
-            <div>
-              <h3 className='titre-evolution'>Evolution</h3>
-              
-            </div>
-          )}
+      <div>
+        {pokemon && (
+          <div  className='modal-content-evolution'>
+            <h3 className='titre-evolution'>Evolution</h3>
+            {pokemon.evolvedFrom && (
+              <div>
+                  {Object.keys(pokemon.evolvedFrom).map((evolutionId) => (
+                    <div key={evolutionId} className='evolution-images-container'>
+                      {allpokemon.map((item) => (
+                        item.id === parseInt(evolutionId) &&(
+                          <div key={item.id}>
+                            <img className='image-pokemon-modal-evolution' src={item.image} alt={item.name.fr} />
+                            <p className='text-evolution'>{pokemon.evolvedFrom[evolutionId]}</p>
+                          </div>
+                        )
+                      ))}
+                    </div>
+                  ))}
+              </div>
+            )}
+            {pokemon.evolvesTo && (
+              <div>
+                  {Object.keys(pokemon.evolvesTo).map((evolutionId) => (
+                    <div key={evolutionId}>
+                      {allpokemon.map((item) => (
+                        item.id === parseInt(evolutionId) && (
+                          <div key={item.id}>
+                            <img className='image-pokemon-modal-evolution' src={item.image} alt={item.name.fr} />
+                            <p className='text-evolution'>{pokemon.evolvesTo[evolutionId]}</p>
+                          </div>
+                        )
+                      ))}
+
+                    </div>
+                  ))}
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   </div>

@@ -208,7 +208,7 @@ function App() {
         </select>
       </div>
       {showModal && (
-            <Modal onClose={() => setShowModal(false)}pokemon={selectedPokemon} types={types} ></Modal>
+            <Modal onClose={() => setShowModal(false)} allpokemon={pokemons}pokemon={selectedPokemon} types={types} ></Modal>
           )}
 
       <div className='container' >

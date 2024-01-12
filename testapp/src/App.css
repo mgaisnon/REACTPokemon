@@ -161,14 +161,14 @@ body {
   vertical-align: middle;
 }
 
-.loading-page{
+.loading-page {
   position: relative;
   width: 100vw;
   height: 100vh;
   background-image: url('./media/forest.jpg');
   background-size: cover;
-  background-position:center 100%;
   background-repeat: no-repeat;
+  background-position: center bottom;
 }
 
 .gif-pikachu{
@@ -208,6 +208,7 @@ body {
   text-align: center;
   font-family: Showcard Gothic;
   color: white;
+  margin: 0;
 }
 
 .auteur{
