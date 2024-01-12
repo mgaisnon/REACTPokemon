@@ -71,6 +71,11 @@ body {
     border-radius: 20px;
 }
 
+.card-pokemon:hover{
+  transform: scale(1.05);
+  background-color: #e7eaef;
+}
+
 .titre-pokemon{
     text-align: center;
     color: rgb(0, 0, 0);
