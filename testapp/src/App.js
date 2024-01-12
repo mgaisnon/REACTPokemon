@@ -210,7 +210,7 @@ function App() {
           <button onClick={toggleLang} className='langue'>Changer de langue</button>
       </div>
       {showModal && (
-            <Modal onClose={() => setShowModal(false)} allpokemon={pokemons}pokemon={selectedPokemon} types={types} ></Modal>
+            <Modal onClose={() => setShowModal(false)} allpokemon={pokemons}pokemon={selectedPokemon} types={types} langue={changeLang}></Modal>
           )}
 
       <div className='container' >

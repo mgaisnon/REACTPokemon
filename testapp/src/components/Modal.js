@@ -2,7 +2,7 @@ import './Modal.css';
 import React, {useState } from 'react';
 
 
-const Modal = ({ onClose, pokemon, types, allpokemon }) => {
+const Modal = ({ onClose, pokemon, types, allpokemon, langue }) => {
   const [isShiny, setIsShiny] = useState(false);
   const [isGrowIn, setIsGrowIn] = useState(false);
 
@@ -14,11 +14,16 @@ const Modal = ({ onClose, pokemon, types, allpokemon }) => {
       setIsGrowIn(false);
     }, 300);
   };
+
   const getTypesNamesById = (typeIds) => {
     if (Array.isArray(typeIds)) {
       return typeIds.map((typeId) => {
         const type = types.find((t) => t.id === typeId);
-        return type ? type.name.fr : 'Type inconnu';
+        if(langue == true){
+          return type ? type.name.fr : 'Type inconnu';
+        } else {
+          return type ? type.name.en : 'Type inconnu';
+        }
       });
     } else {
       return ['Type inconnu'];
@@ -40,7 +45,7 @@ const Modal = ({ onClose, pokemon, types, allpokemon }) => {
       {pokemon && (
         <div>
           <p className='generation-modal'>{pokemon.generation}</p>
-          <h2 className='titre-pokemon-modal'>{pokemon.name.fr} #{pokemon.id}</h2>
+          <h2 className='titre-pokemon-modal'>{langue ? pokemon.name.fr : pokemon.name.en} #{pokemon.id}</h2>
           <p className='close-button' onClick={onClose}> &#x274C;</p>
       </div>
       )}
@@ -77,12 +82,12 @@ const Modal = ({ onClose, pokemon, types, allpokemon }) => {
           {pokemon && (
             <div>
               <h3 className='titre-stats'>Statistiques</h3>
-              <p className='stats-pk'> HP : {pokemon.stats.hp}</p>
-              <p className='stats-pk'> ATK : {pokemon.stats.atk}</p>
-              <p className='stats-pk'> DEF : {pokemon.stats.def}</p>
-              <p className='stats-pk'> VIT : {pokemon.stats.vit}</p>
-              <p className='stats-pk'> SPE_ATK : {pokemon.stats.spe_atk}</p>
-              <p className='stats-pk'> SPE_DEF : {pokemon.stats.spe_def}</p>
+              <p className='stats-pk'> HP : <progress max="100" value={pokemon.stats.hp}></progress>   {pokemon.stats.hp}</p>
+              <p className='stats-pk'> ATK : <progress max="100" value={pokemon.stats.atk}> </progress>   {pokemon.stats.atk}</p>
+              <p className='stats-pk'> DEF : <progress max="100" value={pokemon.stats.def}> </progress>   {pokemon.stats.def}</p>
+              <p className='stats-pk'> VIT : <progress max="100" value={pokemon.stats.vit}> </progress>   {pokemon.stats.vit}</p>
+              <p className='stats-pk'> SPE_ATK : <progress max="100" value={pokemon.stats.spe_atk}> </progress>   {pokemon.stats.spe_atk}</p>
+              <p className='stats-pk'> SPE_DEF : <progress max="100" value={pokemon.stats.spe_def}> </progress>   {pokemon.stats.spe_def}</p>
              </div> 
           )}
       </div>
