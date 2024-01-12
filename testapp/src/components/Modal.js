@@ -1,9 +1,7 @@
 import './Modal.css';
 import React, {useState } from 'react';
 
-/*  Fiche individuelle : 
-    - Arbre des evolutions
-*/
+
 const Modal = ({ onClose, pokemon, types, allpokemon }) => {
   const [isShiny, setIsShiny] = useState(false);
   const [isGrowIn, setIsGrowIn] = useState(false);
@@ -12,7 +10,6 @@ const Modal = ({ onClose, pokemon, types, allpokemon }) => {
     setIsShiny(!isShiny);
     setIsGrowIn(true);
 
-    // Réinitialisez l'effet de croissance après un court délai
     setTimeout(() => {
       setIsGrowIn(false);
     }, 300);
@@ -31,10 +28,10 @@ const Modal = ({ onClose, pokemon, types, allpokemon }) => {
     if (Array.isArray(typeIds)) {
       return typeIds.map((typeId) => {
         const type = types.find((t) => t.id === typeId);
-        return type ? type.image : ''; // Retourne l'image du type ou une chaîne vide si le type n'est pas trouvé
+        return type ? type.image : ''; 
       });
     } else {
-      return ['']; // Retourne une chaîne vide si aucun type n'est fourni
+      return [''];
     }
   };
   
@@ -121,7 +118,6 @@ const Modal = ({ onClose, pokemon, types, allpokemon }) => {
                           </div>
                         )
                       ))}
-
                     </div>
                   ))}
               </div>
