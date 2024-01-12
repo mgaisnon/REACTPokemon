@@ -18,6 +18,12 @@ function App() {
   const [selectedPokemon, setSelectedPokemon] = useState(null);
   const [showModal, setShowModal] = useState(false);
   
+  const [changeLang, setLang] = useState(true);
+
+  const toggleLang = () => {
+    setLang(!changeLang);
+  };
+  
   useEffect(() => {
     fetchPokemon();
     fetchTypes();
@@ -118,7 +124,7 @@ function App() {
   const getTypesNamesById = (typeIds) => {
     return typeIds.map((typeId) => {
       const type = types.find((t) => t.id === typeId);
-      return type ? type.name.fr : 'Type inconnu';
+      return type ? (changeLang ? type.name.fr : type.name.en) : 'Type inconnu';
     });
   };
 
@@ -201,11 +207,7 @@ function App() {
           <option value="">Taille Croissant</option>
           <option value="">Taille Decroissant</option>
         </select>
-        <select className='langue'>
-          <option value="">Langues</option>
-          <option value=""> Français</option>
-          <option value=""> English</option>
-        </select>
+          <button onClick={toggleLang} className='langue'>Changer de langue</button>
       </div>
       {showModal && (
             <Modal onClose={() => setShowModal(false)} allpokemon={pokemons}pokemon={selectedPokemon} types={types} ></Modal>
@@ -215,7 +217,7 @@ function App() {
         {filteredPokemons.map((item) => (
           <div className='card-pokemon' key={item.id} onClick={() => {setShowModal(true); setSelectedPokemon(item)}}>
             <p className='gen'>{item.generation}</p>
-            <p className='titre-pokemon'>{item.name.fr} #{item.id}</p>
+            <p className='titre-pokemon'>{changeLang ? item.name.fr : item.name.en} #{item.id}</p>
             <img className='image-pokemon' src={item.image} alt={item.name.fr} />
             <div className='div-types'>
               {item.types.map((typeId, index) => (
