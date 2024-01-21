@@ -5,6 +5,7 @@ import pikachu from './media/pikachu-running.gif'
 import flagfr from './media/flagfr.png'
 import flagus from './media/flagus.png'
 import Modal from './components/Modal';
+import Tri from './components/Tri';
 
 function App() {
 
@@ -17,7 +18,7 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [selectedPokemon, setSelectedPokemon] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  
+  const [sortingOption, setSortingOption] = useState('');
   const [changeLang, setLang] = useState(true);
 
   const toggleLang = () => {
@@ -44,6 +45,42 @@ function App() {
   useEffect(() => {
     fetchTypesFilter();
   },[typefilter, pokemons.types])
+
+  useEffect(() => {
+    const filteredData = pokemons.filter((pokemon) =>
+      pokemon.name?.fr.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredPokemons(filteredData);
+  }, [searchTerm, pokemons]);
+
+  
+useEffect(() => {
+  if (sortingOption) {
+    const [property, order] = sortingOption.split(' ');
+    const sortedData = [...filteredPokemons].sort((a, b) => {
+      const valueA = getProperty(a, property);
+      const valueB = getProperty(b, property);
+
+      if (typeof valueA === 'number' && typeof valueB === 'number') {
+        return order === 'asc' ? valueA - valueB : valueB - valueA;
+      } else if (typeof valueA === 'string' && typeof valueB === 'string') {
+        return order === 'asc' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
+      } else {
+        return typeof valueA === 'number' ? -1 : 1;
+      }
+    });
+
+    setFilteredPokemons(sortedData);
+  }
+}, [sortingOption, filteredPokemons]);
+
+const getProperty = (obj, path) => {
+  const properties = path.split('.');
+  return properties.reduce((acc, current) => (acc && acc[current] !== undefined ? acc[current] : undefined), obj);
+};
+  const handleSort = (option) => {
+    setSortingOption(option);
+  };
 
   const handleGenerationChange = (event) => {
     setgenFilter(event.target.value);
@@ -135,16 +172,6 @@ function App() {
     });
   };
 
-/** TODO
- 
-  Tri (croissant et decroissant): 
-    - Numero
-    - Alphabetique
-    - Poids
-    - Taille
-  
- */  
-
   return (
     <div>
       
@@ -196,17 +223,8 @@ function App() {
         placeholder='Rechercher un Pokémon ...'
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}></input>
-        <select className='tri'>
-          <option value="">Tri</option>
-          <option value="">Numero Croissant</option>
-          <option value="">Numero Decroissant</option>
-          <option value="">Alphabetique Croissant</option>
-          <option value="">Alphabetique Decroissant</option>
-          <option value="">Poids Croissant</option>
-          <option value="">Poids Decroissant</option>
-          <option value="">Taille Croissant</option>
-          <option value="">Taille Decroissant</option>
-        </select>
+        {/* Componnent Tri*/}
+        <Tri onSort={handleSort}/>
           <button onClick={toggleLang} className='langue'>Changer de langue</button>
       </div>
       {showModal && (
